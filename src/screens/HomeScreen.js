@@ -737,7 +737,7 @@ export default function HomeScreen() {
         </View>
 
         <View testID="foodList">
-
+        <FoodItems foods={filteredfoods} />
           </View>
       </ScrollView>
     </View>
