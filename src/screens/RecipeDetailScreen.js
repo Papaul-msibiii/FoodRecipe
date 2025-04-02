@@ -33,7 +33,10 @@ export default function RecipeDetailScreen(props) {
     >
       {/* recipe Image */}
       <View style={styles.imageContainer} testID="imageContainer">
-     
+      <Image
+          source={{ uri: recipe.recipe.recipeImage }}
+          style={styles.recipeImage}
+        />
       </View>
 
       {/* Back Button and Favorite Button */}
@@ -66,19 +69,46 @@ export default function RecipeDetailScreen(props) {
             testID="recipeDetailsContainer"
           >
             <Text style={styles.recipeTitle} testID="recipeTitle">
-         
+         {recipe.recipe.recipeName}
               
               </Text>
             <Text style={styles.recipeCategory} testID="recipeCategory">
+                {recipe.recipe.recipeCategory}
               </Text>
           </View>
           <View style={styles.miscContainer} testID="miscContainer">
-        
+         <View style={styles.miscItem}>
+          <Text style={styles.miscIcon}>🕒</Text>
+          <Text style={styles.miscText}>35 Mins</Text>
+        </View>
+        <View style={styles.miscItem}>
+          <Text style={styles.miscIcon}>👥</Text>
+          <Text style={styles.miscText}>03 Portions</Text>
+        </View>
+        <View style={styles.miscItem}>
+          <Text style={styles.miscIcon}>🔥</Text>
+          <Text style={styles.miscText}>103 Cal</Text>
+        </View>
+        <View style={styles.miscItem}>
+          <Text style={styles.miscIcon}>🎚️</Text>
+          <Text style={styles.miscText}>Moyenne</Text>
+        </View>
       </View>
 
       {/* Ingredients */}
       <View style={styles.sectionContainer}>
-     
+       <Text style={styles.sectionTitle}>Ingrédients</Text>
+        <View style={styles.ingredientsList} testID="ingredientsList">
+          {(recipe.recipe.ingredients).map((i) => (
+            <View key={i} style={styles.ingredientItem}>
+              <View style={styles.ingredientBullet} />
+              <Text style={styles.ingredientText}>
+                {/* {meal["strMeasure" + i]} {meal["strIngredient" + i]} */}
+                {i.ingredientName} {i.measure}
+              </Text>
+            </View>
+          ))}
+        </View>
       </View>
 
       {/* Instructions */}
@@ -86,7 +116,8 @@ export default function RecipeDetailScreen(props) {
         
         </View>
           {/* Description */}
-         
+         <Text style={styles.sectionTitle}>Instructions</Text>
+          <Text style={styles.instructionsText}>{recipe.recipe.recipeInstructions}</Text>
         </View>
     </ScrollView>
   );
