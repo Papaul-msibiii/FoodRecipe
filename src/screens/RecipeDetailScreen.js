@@ -15,14 +15,18 @@ export default function RecipeDetailScreen(props) {
   const favoriterecipes = useSelector(
     (state) => state.favorites.favoriterecipes
   );
+//   const isFavourite = favoriterecipes?.some(
+//     (favrecipe) => favrecipe.idFood === recipe.idFood
+//   ); // Check by idrecipe
+
   const isFavourite = favoriterecipes?.some(
-    (favrecipe) => favrecipe.idFood === recipe.idFood
-  ); // Check by idrecipe
+    (favrecipe) => favrecipe.recipeId === recipe.recipe.recipeId
+  );
 
   const navigation = useNavigation();
 
   const handleToggleFavorite = () => {
-    dispatch(toggleFavorite(recipe)); // Dispatch the recipe to favorites
+    dispatch(toggleFavorite(recipe.recipe)); // Dispatch the recipe to favorites
   };
 
   return (

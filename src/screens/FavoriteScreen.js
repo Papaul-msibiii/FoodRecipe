@@ -77,16 +77,16 @@ export default function FavoriteScreen() {
         testID="favoriteRecipes"
         contentContainerStyle={styles.listContentContainer}
         data={favoriteRecipesList}
-        keyExtractor={(item) => item.recipe.recipeId}
+        keyExtractor={(item) => item.recipeId}
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.cardContainer}
-            onPress={() => navigation.navigate("RecipeDetail", { recipe: item.recipe })}
+            onPress={() => navigation.navigate("RecipeDetail", { recipe: item })}
           >
-            <Image source={{ uri: item.recipe.recipeImage }} style={styles.recipeImage} />
+            <Image source={{ uri: item.recipeImage }} style={styles.recipeImage} />
             <View>
               <Text style={styles.recipeTitle}>
-                {item.recipe.recipeName}
+                {item.recipeName}
               </Text>
             </View>
           </TouchableOpacity>
