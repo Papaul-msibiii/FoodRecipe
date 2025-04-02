@@ -12,7 +12,35 @@ export default function RecipesFormScreen({ route, navigation }) {
   );
 
   const saverecipe = async () => {
- 
+  try {
+    // Création d'un objet recette
+    const newRecipe = { title, image, description };
+
+    // Récupérer les recettes existantes
+    const storedRecipes = await AsyncStorage.getItem("customrecipes");
+    let recipes = storedRecipes ? JSON.parse(storedRecipes) : [];
+
+    if (recipeToEdit) {
+      // Modifier une recette existante
+      recipes[recipeIndex] = newRecipe;
+      if (onrecipeEdited) {
+        onrecipeEdited(); // Notifier le parent que la recette a été modifiée
+      }
+    } else {
+      // Ajouter une nouvelle recette
+      recipes.push(newRecipe);
+    }
+
+    // Sauvegarder dans AsyncStorage
+    await AsyncStorage.setItem("customrecipes", JSON.stringify(recipes));
+
+    // Retour à l'écran précédent
+    navigation.goBack();
+  } catch (error) {
+    console.error("Erreur lors de l'enregistrement de la recette :", error);
+  }
+
+
   };
 
   return (
